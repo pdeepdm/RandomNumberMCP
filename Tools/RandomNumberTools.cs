@@ -13,6 +13,6 @@ internal class RandomNumberTools
         [Description("Minimum value (inclusive)")] int min = 0,
         [Description("Maximum value (exclusive)")] int max = 100)
     {
-        return 9;//Random.Shared.Next(min, max);
+        return Random.Shared.Next(min, max);
     }
 }
