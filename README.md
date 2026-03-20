@@ -1,67 +1,117 @@
-# MCP Server
+# RandomNumberMCP
 
-This README was created using the C# MCP server project template.
-It demonstrates how you can easily create an MCP server using C# and publish it as a NuGet package.
+An MCP (Model Context Protocol) server built with C# that provides random number generation capabilities.
 
-The MCP server is built as a self-contained application and does not require the .NET runtime to be installed on the target machine.
-However, since it is self-contained, it must be built for each target platform separately.
-By default, the template is configured to build for:
-* `win-x64`
-* `win-arm64`
-* `osx-arm64`
-* `linux-x64`
-* `linux-arm64`
-* `linux-musl-x64`
+## Features
 
-If your users require more platforms to be supported, update the list of runtime identifiers in the project's `<RuntimeIdentifiers />` element.
+- **Random Number Generation**: Generate random numbers within specified ranges
+- **Built with .NET 10**: Leverages the latest .NET runtime for performance and features
+- **Self-Contained Deployment**: Single-file executables for all major platforms
+- **Cross-Platform Support**: Pre-built for Windows, macOS, and Linux
+
+## Supported Platforms
+
+The MCP server is built as self-contained applications for:
+* Windows x64 (`win-x64`)
+* Windows ARM64 (`win-arm64`)
+* macOS ARM64 (`osx-arm64`)
+* Linux x64 (`linux-x64`)
+* Linux ARM64 (`linux-arm64`)
+* Linux musl x64 (`linux-musl-x64`)
+
+## Installation
+
+Install the package from NuGet:
+
+```bash
+dotnet tool install --global RandomNumberMCP
+```
+
+Or add it to your MCP configuration:
+
+```json
+{
+  "servers": {
+    "RandomNumberMCP": {
+      "type": "stdio",
+      "command": "RandomNumberMCP"
+    }
+  }
+}
+```
 
 See [aka.ms/nuget/mcp/guide](https://aka.ms/nuget/mcp/guide) for the full guide.
 
-Please note that this template is currently in an early preview stage. If you have feedback, please take a [brief survey](http://aka.ms/dotnet-mcp-template-survey).
-
 ## Checklist before publishing to NuGet.org
 
-- Test the MCP server locally using the steps below.
-- Update the package metadata in the .csproj file, in particular the `<PackageId>`.
-- Update `.mcp/server.json` to declare your MCP server's inputs.
-  - See [configuring inputs](https://aka.ms/nuget/mcp/guide/configuring-inputs) for more details.
-- Pack the project using `dotnet pack`.
+- [x] Test the MCP server locally using the steps below
+- [x] Update the package metadata in the .csproj file
+- [x] Update `.mcp/server.json` to declare the MCP server's inputs
+- [ ] Pack the project using `dotnet pack`
+- [ ] Publish to NuGet.org
 
-The `bin/Release` directory will contain the package file (.nupkg), which can be [published to NuGet.org](https://learn.microsoft.com/nuget/nuget-org/publish-a-package).
+For detailed guidance, see [aka.ms/nuget/mcp/guide](https://aka.ms/nuget/mcp/guide).
 
-## Developing locally
+## Building for Release
+
+Pack the project for NuGet distribution:
+
+```bash
+dotnet pack --configuration Release
+```
+
+The `bin/Release` directory will contain the package file (`.nupkg`), which can be [published to NuGet.org](https://learn.microsoft.com/en-us/nuget/nuget-org/publish-a-package).
+
+## Developing Locally
 
 To test this MCP server from source code (locally) without using a built MCP server package, you can configure your IDE to run the project directly using `dotnet run`.
 
 ```json
 {
   "servers": {
-    "MyMcpServer": {
+    "RandomNumberMCP-Dev": {
       "type": "stdio",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "<PATH TO PROJECT DIRECTORY>"
+        "<PATH TO PROJECT DIRECTORY>/RandomNumberMCP.csproj"
       ]
     }
   }
 }
 ```
 
-Refer to the VS Code or Visual Studio documentation for more information on configuring and using MCP servers:
+To run locally:
 
-- [Use MCP servers in VS Code (Preview)](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
-- [Use MCP servers in Visual Studio (Preview)](https://learn.microsoft.com/visualstudio/ide/mcp-servers)
+```bash
+dotnet run
+```
 
-## Testing the MCP Server
+## Available Tools
 
-Once configured, you can ask Copilot Chat for a random number, for example, `Give me 3 random numbers`. It should prompt you to use the `get_random_number` tool on the `MyMcpServer` MCP server and show you the results.
+### GetRandomNumber
+Generates a random number between the specified minimum and maximum values.
 
-## Publishing to NuGet.org
+**Parameters:**
+- `min` (int, default: 0): Minimum value (inclusive)
+- `max` (int, default: 100): Maximum value (exclusive)
 
-1. Run `dotnet pack -c Release` to create the NuGet package
-2. Publish to NuGet.org with `dotnet nuget push bin/Release/*.nupkg --api-key <your-api-key> --source https://api.nuget.org/v3/index.json`
+**Returns:** A random integer in the range [min, max)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Resources
+
+- [MCP Protocol Documentation](https://modelcontextprotocol.io)
+- [Microsoft .NET Documentation](https://learn.microsoft.com/dotnet)
+- [Model Context Protocol C# SDK](https://github.com/modelcontextprotocol/sdk-csharp)
 
 ## Using the MCP Server from NuGet.org
 

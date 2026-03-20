@@ -20,16 +20,23 @@
 
     <!-- Set recommended package metadata -->
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageId>RandomNumberMCP</PackageId>
     <PackageVersion>0.1.0-beta</PackageVersion>
     <PackageTags>AI; MCP; server; stdio</PackageTags>
+    <Authors>Pradeep</Authors>
     <Description>An MCP server using the MCP C# SDK.</Description>
+    <PackageProjectUrl>https://github.com/pdeepdm/RandomNumberMCP</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pdeepdm/RandomNumberMCP</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
   </PropertyGroup>
 
   <!-- Include additional files for browsing the MCP server. -->
   <ItemGroup>
     <None Include=".mcp\server.json" Pack="true" PackagePath="/.mcp/" />
     <None Include="README.md" Pack="true" PackagePath="/" />
+    <None Include="LICENSE" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
